@@ -1,0 +1,17 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+/* Homepage */
+@media (min-width: 992px) {
+	main#homepage .jumbotron h1 {
+		padding-right: 100px;
+	}
+}
+@media (min-width: 1200px) {
+	main#homepage .jumbotron h1 {
+		padding-right: 300px;
+	}
+}

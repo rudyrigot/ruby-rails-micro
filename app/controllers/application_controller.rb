@@ -4,12 +4,10 @@ class ApplicationController < ActionController::Base
   before_action :set_ref
 
   def index
-    begin
-      @documents = api.create_search_form("everything")
-                      .submit(@ref)
-    rescue Prismic::SearchForm::RefNotFoundException => e
-      render inline: e.message, status: :not_found
-    end
+    @document = PrismicService.get_document(api.bookmark("homepage"), api, @ref)
+    @arguments = api.create_search_form("arguments")
+                    .set("orderings", "[my.argument.priority desc]")
+                    .submit(@ref)
   end
 
   def document

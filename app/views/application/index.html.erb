@@ -1,28 +1,26 @@
-<form action="/search" method="GET">
-  <input type="text" name="q" value="">
-  <input type="hidden" name="ref" value="<%= @ref %>">
-  <input type="submit" value="Search">
-</form>
-<hr />
-<h2>
-  <%=
-    case @documents.size
-    when 0
-      "No document found"
-    when 1
-      "One document found"
-    else
-      "#{@documents.size} documents found"
-    end
-  %>
-</h2>
+<main id="homepage">
 
-<ul>
-  <% @documents.each do |doc| %>
-    <li>
-      <%= link_to_doc(doc, params[:ref]) do %>
-        <%= doc.slugs.first %>
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      
+      <%= @document.fragments["title"].as_html(link_resolver(@maybe_ref)).html_safe %>
+
+      <%= @document.fragments["lede"].as_html(link_resolver(@maybe_ref)).html_safe %>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <% @arguments.each do |argument| %>
+        <div class="col-md-4">
+          <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@maybe_ref)).html_safe %></p>
+          <h3><%= argument.fragments["title"].blocks[0].text %></h3>
+          <%= argument.fragments["description"].as_html(link_resolver(@maybe_ref)).html_safe %>
+        </div>
       <% end %>
-    </li>
-  <% end %>
-</ul>
+    </div>
+  </div>
+
+</main>
