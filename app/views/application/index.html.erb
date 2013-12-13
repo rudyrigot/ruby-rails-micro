@@ -11,16 +11,26 @@
     </div>
   </div>
 
-  <div class="container">
+  <div id="arguments" class="container">
     <div class="row">
       <% @arguments.each do |argument| %>
-        <div class="col-md-4">
+        <div class="col-md-4" id="<%= argument.id %>">
           <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@maybe_ref)).html_safe %></p>
           <h3><%= argument.fragments["title"].blocks[0].text %></h3>
           <%= argument.fragments["description"].as_html(link_resolver(@maybe_ref)).html_safe %>
         </div>
       <% end %>
     </div>
+  </div>
+
+  <div id="references" class="container">
+    <% @references.each do |reference| %>
+      <%= image_tag(reference.fragments['logo'].get_view('flat').url,
+            size: "150x75",
+            alt: reference.fragments['name'].blocks[0].text,
+            title: reference.fragments['name'].blocks[0].text,
+            id: reference.id) %>
+    <% end %>
   </div>
 
 </main>

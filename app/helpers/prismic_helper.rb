@@ -13,11 +13,21 @@ module PrismicHelper
 
   def link_resolver(maybe_ref)
     Prismic::LinkResolver.new(maybe_ref){|doc|
-      document_path(id: doc.id, slug: doc.slug, ref: maybe_ref)
-      # maybe_ref is not expected by document path, so it appends a ?ref=currentrefid to the URL;
-      # since maybe_ref is nil when on master ref, it appends nothing.
-      # You should do the same for every path method used in the link_resolver and elsewhere in your app,
-      # so links propagate the ref id.
+      case doc.link_type
+      when 'article'
+        case doc.id
+        when api.bookmark('homepage')
+          root_path(ref: maybe_ref)
+        else
+          raise "Article of id #{doc.id} doesn't have a known bookmark"
+        end
+      when 'argument'
+        root_path(ref: maybe_ref) + '#' + doc.id
+      when 'reference'
+        root_path(ref: maybe_ref) + '#' + doc.id
+      else
+        raise "link_resolver doesn't know how to write URLs for #{doc.link_type} type."
+      end
     }
   end
 

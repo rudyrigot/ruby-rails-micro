@@ -15,3 +15,24 @@ body {
 		padding-right: 300px;
 	}
 }
+main#homepage #arguments {
+	margin-top: 100px;
+}
+main#homepage .argument-image {
+	text-align: center;
+}
+@media (max-width: 991px) and (min-width: 500px) {
+	main#homepage .argument-image {
+		float:left;
+		clear:left;
+		margin-right: 20px;
+	}
+}
+main#homepage #references {
+	text-align: center;
+	margin-top: 150px;
+	margin-bottom: 30px;
+}
+main#homepage #references img {
+	margin: 0 20px;
+}

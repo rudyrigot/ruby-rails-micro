@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
     @arguments = api.create_search_form("arguments")
                     .set("orderings", "[my.argument.priority desc]")
                     .submit(@ref)
+    @references = api.create_search_form("references")
+                    .submit(@ref)
   end
 
   def document
