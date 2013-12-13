@@ -1,0 +1,9 @@
+<main id="download" class="container">
+	<div class="page-title">
+		<%= @document.fragments["title"].as_html(link_resolver(@maybe_ref)).html_safe %>
+		<%= @document.fragments["lede"] ? @document.fragments["lede"].as_html(link_resolver(@maybe_ref)).html_safe : '' %>
+	</div>
+	<article>
+		<%= @document.fragments["body"].as_html(link_resolver(@maybe_ref)).html_safe %>
+	</article>
+</main>

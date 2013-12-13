@@ -12,6 +12,10 @@ class ApplicationController < ActionController::Base
                     .submit(@ref)
   end
 
+  def download
+    @document = PrismicService.get_document(api.bookmark("download"), api, @ref)
+  end
+
   def document
     id = params[:id]
     slug = params[:slug]

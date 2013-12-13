@@ -26,9 +26,11 @@
         <div class="navbar-collapse collapse" id="top-navbar">
           <ul class="nav navbar-nav">
             <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path(ref: @maybe_ref) %></li>
+            <li <% if @document.try(:id) == api.bookmark('download') %>class="active"<% end %>><%= link_to "Download", download_path(ref: @maybe_ref) %></li>
+            <li <% if @document.try(:id) == api.bookmark('doc') %>class="active"<% end %>><%= link_to "Documentation", download_path(ref: @maybe_ref) %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <!-- List here -->
+            <li <% if @document.try(:id) == api.bookmark('getinvolved') %>class="active"<% end %>><%= link_to "Get involved", download_path(ref: @maybe_ref) %></li>
           </ul>
         </div>
       </div>
