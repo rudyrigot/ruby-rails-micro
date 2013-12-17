@@ -52,3 +52,10 @@ main#download [data-oembed-type='link'][data-oembed-provider='githubog:gitreposi
 main#download article {
 	margin-bottom: 100px;
 }
+
+main#download .download-button:first-child {
+	margin-top: 20px;
+}
+main#download .download-button {
+	margin-top: 10px;
+}

@@ -4,9 +4,9 @@
   <div class="jumbotron">
     <div class="container">
       
-      <%= @document.fragments["title"].as_html(link_resolver(@maybe_ref)).html_safe %>
+      <%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 
-      <%= @document.fragments["lede"].as_html(link_resolver(@maybe_ref)).html_safe %>
+      <%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 
     </div>
   </div>
@@ -15,22 +15,26 @@
     <div class="row">
       <% @arguments.each do |argument| %>
         <div class="col-md-4" id="<%= argument.id %>">
-          <p class="argument-image"><%= argument.fragments["icon"].get_view('medium').as_html(link_resolver(@maybe_ref)).html_safe %></p>
-          <h3><%= argument.fragments["title"].blocks[0].text %></h3>
-          <%= argument.fragments["description"].as_html(link_resolver(@maybe_ref)).html_safe %>
+          <p class="argument-image"><%= argument['argument.icon'] && argument['argument.icon'].get_view('medium') ? argument['argument.icon'].get_view('medium').as_html_safe(link_resolver(@maybe_ref)) : '' %></p>
+          <h3><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h3>
+          <%= argument['argument.description'].as_html_safe(link_resolver(@maybe_ref)) %>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div id="references" class="container">
-    <% @references.each do |reference| %>
-      <%= image_tag(reference.fragments['logo'].get_view('flat').url,
-            size: "150x75",
-            alt: reference.fragments['name'].blocks[0].text,
-            title: reference.fragments['name'].blocks[0].text,
-            id: reference.id) %>
-    <% end %>
-  </div>
+  <% if !@references.empty? %>
+    <div id="references" class="container">
+      <% @references.each do |reference| %>
+        <% if reference['reference.logo'] && reference['reference.logo'].get_view('flat') %>
+          <%= image_tag(reference['reference.logo'].get_view('flat').url,
+                size: "150x75",
+                alt: reference.fragments['name'].blocks[0].text,
+                title: reference.fragments['name'].blocks[0].text,
+                id: reference.id) %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 
 </main>
