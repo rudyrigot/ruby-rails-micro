@@ -4,10 +4,10 @@ class ApplicationController < ActionController::Base
 
   def index
     @document = PrismicService.get_document(api.bookmark("homepage"), api, @ref)
-    @arguments = api.create_search_form("arguments")
+    @arguments = api.form("arguments")
                     .orderings("[my.argument.priority desc]")
                     .submit(@ref)
-    @references = api.create_search_form("references")
+    @references = api.form("references")
                     .submit(@ref)
   end
 
@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def search
-    @documents = api.create_search_form("everything")
+    @documents = api.form("everything")
                     .query(%([[:d = fulltext(document, "#{params[:q]}")]]))
                     .submit(@ref)
   end
@@ -91,7 +91,7 @@ class ApplicationController < ActionController::Base
   ## before_action methods
 
   # Setting @ref as the actual ref id being queried, even if it's the master ref.
-  # To be used to call the API, for instance: api.create_search_form('everything').submit(@ref)
+  # To be used to call the API, for instance: api.form('everything').submit(@ref)
   def set_ref
     @ref = params[:ref].blank? ? api.master_ref.ref : params[:ref]
   end
