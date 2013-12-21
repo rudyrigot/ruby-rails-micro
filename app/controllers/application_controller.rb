@@ -26,7 +26,16 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def document
+  def dochome
+    @docchapters = api.form("doc").query(%([[:d = at(document.type, "docchapter")]])).orderings('[my.docchapter.priority desc]').submit(@ref)
+    if @docchapters.empty?
+      render inline: "You need to have at least one documentation chapter published", status: :not_found
+    else
+      redirect_to doc_path(@docchapters[0].id, @docchapters[0].slug, ref: @maybe_ref)
+    end
+  end
+
+  def doc
     id = params[:id]
     slug = params[:slug]
 
@@ -36,15 +45,21 @@ class ApplicationController < ActionController::Base
     # Of course, you can change slug_checker in prismic_service.rb, depending on your URL strategy.
     @slug_checker = PrismicService.slug_checker(@document, slug)
     if !@slug_checker[:correct]
-      render inline: "Document not found", status: :not_found, file: "#{Rails.root}/public/404", layout: false if !@slug_checker[:redirect]
-      redirect_to blogpost_path(id, @document.slug), status: :moved_permanently if @slug_checker[:redirect]
-    end
-  end
+      render status: :not_found, file: "#{Rails.root}/public/404", layout: false if !@slug_checker[:redirect]
+      redirect_to doc_path(id, @document.slug), status: :moved_permanently if @slug_checker[:redirect]
+    else
+      # Getting sub-documentations in the chapter, and replacing the serialization of their headers.
+      @docs = @document['docchapter.docs'].map{ |group| PrismicService.get_document(group['linktodoc'], api, @ref) }
+      @docs.each {|doc|
+        PrismicService.lower_html_heading(doc)
+      }
 
-  def search
-    @documents = api.form("everything")
-                    .query(%([[:d = fulltext(document, "#{params[:q]}")]]))
-                    .submit(@ref)
+      # Getting all chapters (for the left navigation)
+      @docchapters = api.create_search_form('everything')
+                        .query('[[:d = at(document.type, "docchapter")]]')
+                        .orderings('[priority desc]')
+                        .submit(@ref)
+    end
   end
 
 

@@ -59,3 +59,14 @@ main#download .download-button:first-child {
 main#download .download-button {
 	margin-top: 10px;
 }
+
+/* Documentation */
+
+main#documentation #docnav {
+	margin-top: 50px;
+}
+main#documentation section {
+	padding-top: 30px;
+	margin-bottom: 60px;
+	border-top: 1px solid #eee;
+}

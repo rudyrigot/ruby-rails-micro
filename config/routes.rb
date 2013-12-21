@@ -61,11 +61,11 @@ StarterRubyRails::Application.routes.draw do
   # Download page
   get "/download", to: 'application#download'
 
-  # # Document detail
-  get '/document/:id/:slug', to: 'application#document', constraints: {id: /[-_a-zA-Z0-9]{16}/}, as: :document
+  # Documentation home
+  get "/doc", to: 'application#dochome', as: :dochome
 
-  # # Basic search
-  get '/search', to: 'application#search', as: :search
+  # Documentation page
+  get "/doc/:id/:slug", to: 'application#doc', constraints: {id: /[-_a-zA-Z0-9]{16}/}, as: :doc
 
   # # Prismic.io OAuth
   # GET     /signin                                     controllers.Prismic.signin

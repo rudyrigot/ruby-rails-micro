@@ -1,0 +1,38 @@
+<main id="documentation" class="container">
+	<div class="row">
+		<div class="col-sm-3">
+			<div id="docnav">
+				<ul class="list-group">
+					<% @docchapters.each do |docchapter| %>
+						<li class="list-group-item">
+							<%= link_to docchapter.first_title, link_resolver(@maybe_ref).link_to(docchapter) %>
+							<% if docchapter.id == @document.id && !@docs.empty? %>
+								<ul>
+									<% @docs.each do |doc| %>
+										<li>
+											<%= link_to doc.first_title, "##{doc.id}" %>
+										</li>
+									<% end %>
+								</ul>
+							<% end %>
+						</li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+		<div class="col-sm-9">
+			<div class="page-title">
+				<%= @document['docchapter.title'] ? @document['docchapter.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+				<%= @document['docchapter.intro'] ? @document['docchapter.intro'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+			</div>
+			<article>
+				<% @docs.each do |doc| %>
+					<section id="<%= doc.id %>">
+						<%= doc['doc.title'].as_html_safe(link_resolver(@maybe_ref)) %>
+						<%= doc['doc.content'].as_html_safe(link_resolver(@maybe_ref)) %>
+					</section>
+				<% end %>
+			</article>
+		</div>
+	</div>
+</main>

@@ -20,9 +20,20 @@ module PrismicHelper
         end
 
       when 'argument'
-        root_path(ref: maybe_ref) + '#' + doc.id
+        root_path(ref: maybe_ref)+"##{doc.id}"
       when 'reference'
-        root_path(ref: maybe_ref) + '#' + doc.id
+        root_path(ref: maybe_ref)+"##{doc.id}"
+      when 'docchapter'
+        doc_path(id: doc.id, slug: doc.slug, ref: maybe_ref)
+      when 'doc'
+        # We first need to retrieve the parent docchapter
+        docchapters = api.form('doc').query(%([[:d = at(my.docchapter.docs.linktodoc, "#{doc.id}")]])).orderings('[my.docchapter.priority desc]').submit(maybe_ref || api.master)
+        if !docchapters.empty?
+          doc_path(id: docchapters[0].id, slug: docchapters[0].slug, ref: maybe_ref)+"##{doc.id}"
+        else
+          warn "Documentation doc.slug isn't linked from a Documentation chapter; link points to Documentation home instead."
+          dochome_path(ref: maybe_ref)
+        end
       else
         raise "link_resolver doesn't know how to write URLs for #{doc.link_type} type."
       end
