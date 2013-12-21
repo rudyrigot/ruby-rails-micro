@@ -18,8 +18,9 @@ module PrismicService
       Prismic.api(config('url'), access_token)
     end
 
-    # Gets a document from its ID.
-    def get_document(id, api, ref)
+    # Gets a document from its ID or DocumentLink
+    def get_document(id_or_doclink, api, ref)
+      id = id_or_doclink.is_a?(Prismic::Fragments::DocumentLink) ? id_or_doclink.id : id_or_doclink
       documents = api.form("everything")
                      .query("[[:d = at(document.id, \"#{id}\")]]")
                      .submit(ref)
