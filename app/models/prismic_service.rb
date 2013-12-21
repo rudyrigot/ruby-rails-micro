@@ -28,6 +28,16 @@ module PrismicService
       documents.empty? ? nil : documents.first
     end
 
+    # Makes a fragment or the whole document be output in HTML with a lower heading.
+    # For instance, "heading1" blocks will serialize in HTML surrounded by <h2> instead of <h1>.
+    def lower_html_heading(doc)
+      doc.fragments.each { |_, fragment|
+        fragment.blocks.each { |block|
+          def block.as_html(link_resolver); %(<h#{level+1}>#{text}</h#{level+1}>) end if block.is_a?(Prismic::Fragments::StructuredText::Block::Heading)
+        }
+      }
+    end
+
     # Checks if the slug is the right one for the document.
     # You can change this depending on your URL strategy.
     def slug_checker(document, slug)
