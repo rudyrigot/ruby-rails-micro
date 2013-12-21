@@ -16,6 +16,16 @@ module Prismic
 			end
 		end
 
+		class Group
+
+			def each(&blk)
+				@fragment_list_array.each { |elem| yield(elem) }
+			end
+			def map(&blk)
+				@fragment_list_array.map { |elem| yield(elem) }
+			end
+		end
+
 		# You can override any of the kit's features at will, in its HTML serialization for instance.
 		# (The kit provides a basic one, but you get to make the one that best fits your design)
 		# For instance, below is a commented-out overriding of the HTML serialization for images within StructuredText fragments.
