@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
       }
 
       # Getting all chapters (for the left navigation)
-      @docchapters = api.create_search_form('everything')
+      @docchapters = api.form('everything')
                         .query('[[:d = at(document.type, "docchapter")]]')
                         .orderings('[priority desc]')
                         .submit(@ref)
@@ -67,11 +67,11 @@ class ApplicationController < ActionController::Base
                     .query(%([[:d = fulltext(document, "#{params[:q]}")]]))
                     .submit(@ref)
 
-      # Getting all chapters (for the left navigation)
-      @docchapters = api.create_search_form('everything')
-                        .query('[[:d = at(document.type, "docchapter")]]')
-                        .orderings('[priority desc]')
-                        .submit(@ref)
+    # Getting all chapters (for the left navigation)
+    @docchapters = api.form('everything')
+                      .query('[[:d = at(document.type, "docchapter")]]')
+                      .orderings('[priority desc]')
+                      .submit(@ref)
   end
 
 
