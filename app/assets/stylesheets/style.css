@@ -70,3 +70,14 @@ main#documentation section {
 	margin-bottom: 60px;
 	border-top: 1px solid #eee;
 }
+main#documentation ul#searchresult li {
+	font-size: 1.1em;
+	margin-bottom: 10px;
+}
+main#documentation ul#searchresult,
+main#documentation #newsearch {
+	margin-bottom: 50px;
+}
+main#documentation #doc-search {
+	margin-top: 20px;
+}

@@ -62,6 +62,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def docsearch
+  	@documents = api.form("doc")
+                    .query(%([[:d = fulltext(document, "#{params[:q]}")]]))
+                    .submit(@ref)
+
+      # Getting all chapters (for the left navigation)
+      @docchapters = api.create_search_form('everything')
+                        .query('[[:d = at(document.type, "docchapter")]]')
+                        .orderings('[priority desc]')
+                        .submit(@ref)
+  end
+
 
   # Actions for the OAuth2 pages (signin, signout, ...)
 
