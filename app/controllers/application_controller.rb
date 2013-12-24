@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
       # Getting all chapters (for the left navigation)
       @docchapters = api.form('everything')
                         .query('[[:d = at(document.type, "docchapter")]]')
-                        .orderings('[priority desc]')
+                        .orderings('[my.docchapter.priority desc]')
                         .submit(@ref)
     end
   end
@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
     # Getting all chapters (for the left navigation)
     @docchapters = api.form('everything')
                       .query('[[:d = at(document.type, "docchapter")]]')
-                      .orderings('[priority desc]')
+                      .orderings('[my.docchapter.priority desc]')
                       .submit(@ref)
   end
 
