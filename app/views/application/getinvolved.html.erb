@@ -1,0 +1,43 @@
+<main id="getinvolved" class="container">
+	<section class="row">
+		<div class="col-md-8">
+			<div class="page-title">
+				<%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+				<%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+			</div>
+			<article>
+				<%= @document['article.body'] ? @document['article.body'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+			</article>
+		</div>
+		<div class="col-md-4" id="contributors">
+			<h3>Main contributors</h3>
+			<% @contributors.each do |contributor| %>
+				<section class="contributor">
+
+					<p class="image"><%= contributor['contributor.photo'] && contributor['contributor.photo'].get_view('icon') ? contributor['contributor.photo'].get_view('icon').as_html_safe(link_resolver(@maybe_ref)) : '' %></p>
+
+					<h4><%= contributor['contributor.fullname'] ? contributor['contributor.fullname'].as_text : '' %></h4>
+					<p class="title"><%= contributor['contributor.title'] ? contributor['contributor.title'].as_text : '' %></p>
+
+					<div class="description">
+						<%= contributor['contributor.description'] ? contributor['contributor.description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+					</div>
+
+					<% if !contributor['contributor.links'].empty? %>
+						<ul>
+							<% contributor['contributor.links'].each do |linkgroup| %>
+								<% if linkgroup['link'] %>
+									<li>
+										<%= linkgroup['link'].start_html(link_resolver(@maybe_ref)).html_safe %>
+											<%= linkgroup['label'] ? linkgroup['label'].as_text : linkgroup['link'].url %>
+										<%= linkgroup['link'].end_html(link_resolver(@maybe_ref)).html_safe %>
+									</li>
+								<% end %>
+							<% end %>
+						</ul>
+					<% end %>
+				</section>
+			<% end %>
+		</div>
+	</section>
+</main>

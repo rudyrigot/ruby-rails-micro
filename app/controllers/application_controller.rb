@@ -74,6 +74,12 @@ class ApplicationController < ActionController::Base
                       .submit(@ref)
   end
 
+  def getinvolved
+    @document = PrismicService.get_document(api.bookmark("getinvolved"), api, @ref)
+
+    @contributors = api.form('contributors').orderings('[my.contributor.level]').submit(@ref)
+  end
+
 
   # Actions for the OAuth2 pages (signin, signout, ...)
 

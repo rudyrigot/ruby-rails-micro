@@ -70,6 +70,9 @@ StarterRubyRails::Application.routes.draw do
   # Doc search
   get '/doc/search', to: 'application#docsearch', as: :doc_search
 
+  # Get involved
+  get "/getinvolved", to: 'application#getinvolved'
+
   # # Prismic.io OAuth
   # GET     /signin                                     controllers.Prismic.signin
   # GET     /auth_callback                              controllers.Prismic.callback(code: Option[String], redirect_uri: Option[String])

@@ -30,7 +30,7 @@
             <li <% if @document.try(:type) == 'doc' || @document.try(:type) == 'docchapter' || action_name == 'docsearch' %>class="active"<% end %>><%= link_to "Documentation", dochome_path(ref: @maybe_ref) %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li <% if @document.try(:id) == api.bookmark('getinvolved') %>class="active"<% end %>><%= link_to "Get involved", download_path(ref: @maybe_ref) %></li>
+            <li <% if @document.try(:id) == api.bookmark('getinvolved') %>class="active"<% end %>><%= link_to "Get involved", getinvolved_path(ref: @maybe_ref) %></li>
           </ul>
         </div>
       </div>

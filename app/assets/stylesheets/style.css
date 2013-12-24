@@ -85,3 +85,34 @@ main#documentation #newsearch {
 main#documentation #doc-search {
 	margin-top: 20px;
 }
+
+/* Get involved */
+
+main#getinvolved #contributors {
+	margin-top: 50px;
+	padding: 10px 20px;
+	border: 1px solid #e7e7e7;
+	background: #f8f8f8;
+	border-radius: 10px;
+}
+main#getinvolved #contributors .contributor {
+	margin-top: 40px;
+}
+main#getinvolved #contributors h3 {
+	margin: 15px 0;
+}
+main#getinvolved #contributors h4 {
+	margin: 0;
+	text-align: center;
+}
+main#getinvolved #contributors .image {
+	text-align: center;
+}
+main#getinvolved #contributors .title {
+	margin: 0;
+	font-style: italic;
+	text-align: center;
+}
+main#getinvolved #contributors .description {
+	margin: 10px 0;
+}
