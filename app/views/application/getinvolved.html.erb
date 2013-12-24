@@ -1,13 +1,7 @@
 <main id="getinvolved" class="container">
 	<section class="row">
 		<div class="col-md-8">
-			<div class="page-title">
-				<%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
-				<%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
-			</div>
-			<article>
-				<%= @document['article.body'] ? @document['article.body'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
-			</article>
+			<%= render partial: "article" %>
 		</div>
 		<div class="col-md-4" id="contributors">
 			<h3>Main contributors</h3>
