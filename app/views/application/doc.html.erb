@@ -16,8 +16,8 @@
 			<article>
 				<% @docs.each do |doc| %>
 					<section id="<%= doc.id %>">
-						<%= doc['doc.title'].as_html_safe(link_resolver(@maybe_ref)) %>
-						<%= doc['doc.content'].as_html_safe(link_resolver(@maybe_ref)) %>
+						<%= doc['doc.title'] ? doc['doc.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+						<%= doc['doc.content'] ? doc['doc.content'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 					</section>
 				<% end %>
 			</article>
