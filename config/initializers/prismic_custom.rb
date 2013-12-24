@@ -24,6 +24,12 @@ module Prismic
 			def map(&blk)
 				@fragment_list_array.map { |elem| yield(elem) }
 			end
+			def length
+				@fragment_list_array.length
+			end
+			def empty?
+				@fragment_list_array.empty?
+			end
 		end
 
 		# You can override any of the kit's features at will, in its HTML serialization for instance.
