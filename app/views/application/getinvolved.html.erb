@@ -6,7 +6,7 @@
 		<div class="col-md-4" id="contributors">
 			<h3>Main contributors</h3>
 			<% @contributors.each do |contributor| %>
-				<section class="contributor">
+				<section class="contributor" id="<%= contributor.id %>">
 
 					<p class="image"><%= contributor['contributor.photo'] && contributor['contributor.photo'].get_view('icon') ? contributor['contributor.photo'].get_view('icon').as_html_safe(link_resolver(@maybe_ref)) : '' %></p>
 
@@ -17,7 +17,7 @@
 						<%= contributor['contributor.description'] ? contributor['contributor.description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 					</div>
 
-					<% if !contributor['contributor.links'].empty? %>
+					<% if contributor['contributor.links'] && !contributor['contributor.links'].empty? %>
 						<ul>
 							<% contributor['contributor.links'].each do |linkgroup| %>
 								<% if linkgroup['link'] %>

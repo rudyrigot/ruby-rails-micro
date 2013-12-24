@@ -15,6 +15,8 @@ module PrismicHelper
           root_path(ref: maybe_ref)
         when api.bookmark('download')
           download_path(ref: maybe_ref)
+        when api.bookmark('getinvolved')
+          getinvolved_path(ref: maybe_ref)
         else
           raise "Article of id #{doc.id} doesn't have a known bookmark"
         end
@@ -34,6 +36,8 @@ module PrismicHelper
           warn "Documentation doc.slug isn't linked from a Documentation chapter; link points to Documentation home instead."
           dochome_path(ref: maybe_ref)
         end
+      when 'contributor'
+        getinvolved_path(ref: maybe_ref)+"##{doc.id}"
       else
         raise "link_resolver doesn't know how to write URLs for #{doc.link_type} type."
       end
