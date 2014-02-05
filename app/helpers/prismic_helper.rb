@@ -24,7 +24,9 @@ module PrismicHelper
       when 'argument'
         root_path(ref: maybe_ref)+"##{doc.id}"
       when 'reference'
-        root_path(ref: maybe_ref)+"##{doc.id}"
+        root_path(ref: maybe_ref)+"#references"
+      when 'cta'
+        root_path(ref: maybe_ref)+"#ctas"
       when 'docchapter'
         doc_path(id: doc.id, slug: doc.slug, ref: maybe_ref)
       when 'doc'

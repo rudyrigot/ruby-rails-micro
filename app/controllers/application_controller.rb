@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
     @arguments = api.form("arguments")
                     .orderings("[my.argument.priority desc]")
                     .submit(@ref)
+    @ctas = api.form("ctas")
+    				.orderings("[my.cta.priority desc]")
+                    .submit(@ref)
     @references = api.form("references")
                     .submit(@ref)
   end

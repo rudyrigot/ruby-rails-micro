@@ -33,6 +33,14 @@ main#homepage .argument-image {
 		margin-right: 20px;
 	}
 }
+main#homepage #ctas {
+	margin-top: 100px;
+	margin-bottom: 100px;
+	text-align: center;
+}
+main#homepage #ctas a {
+	margin: 0 15px;
+}
 main#homepage #references {
 	text-align: center;
 	margin-top: 150px;
