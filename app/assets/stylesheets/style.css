@@ -44,11 +44,11 @@ main#homepage #references img {
 
 /* GitHub embed */
 
-[data-oembed-type='link'][data-oembed-provider='githubog:gitrepository']{border:1px solid #c4c8ca;padding:10px;-webkit-border-radius:3px;border-radius:3px;position:relative; margin: 30px 50px 50px; overflow:hidden;}
-[data-oembed-type='link'][data-oembed-provider='githubog:gitrepository'] h1{ position:absolute; top:16px; left:80px; white-space:nowrap; overflow:hidden; -o-text-overflow:ellipsis; text-overflow:ellipsis; font-size: 1.2em; margin:0;}
-[data-oembed-type='link'][data-oembed-provider='githubog:gitrepository'] img{ border:none; padding:0; margin:0; width:60px }
-[data-oembed-type='link'][data-oembed-provider='githubog:gitrepository'] p{ position:absolute; top:36px; left:80px; white-space:nowrap; overflow:hidden; -o-text-overflow:ellipsis; text-overflow:ellipsis}
-[data-oembed-type='link'][data-oembed-provider='githubog:gitrepository']:hover{-webkit-box-shadow:0 0 5px rgba(56,60,70,0.24);box-shadow:0 0 5px rgba(56,60,70,0.24)}
+[data-oembed-type='link'][data-oembed-provider='object']{border:1px solid #c4c8ca;padding:10px;-webkit-border-radius:3px;border-radius:3px;position:relative; margin: 30px 50px 50px; overflow:hidden;}
+[data-oembed-type='link'][data-oembed-provider='object'] h1{ position:absolute; top:16px; left:80px; white-space:nowrap; overflow:hidden; -o-text-overflow:ellipsis; text-overflow:ellipsis; font-size: 1.2em; margin:0;}
+[data-oembed-type='link'][data-oembed-provider='object'] img{ border:none; padding:0; margin:0; width:60px }
+[data-oembed-type='link'][data-oembed-provider='object'] p{ position:absolute; top:36px; left:80px; white-space:nowrap; overflow:hidden; -o-text-overflow:ellipsis; text-overflow:ellipsis}
+[data-oembed-type='link'][data-oembed-provider='object']:hover{-webkit-box-shadow:0 0 5px rgba(56,60,70,0.24);box-shadow:0 0 5px rgba(56,60,70,0.24)}
 
 
 /* Download */
