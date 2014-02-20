@@ -1,3 +1,5 @@
+require('cgi')
+
 module Prismic
 
 	class Document
@@ -16,19 +18,13 @@ module Prismic
 			end
 		end
 
-		class Group
-
-			def each(&blk)
-				@fragment_list_array.each { |elem| yield(elem) }
-			end
-			def map(&blk)
-				@fragment_list_array.map { |elem| yield(elem) }
-			end
-			def length
-				@fragment_list_array.length
-			end
-			def empty?
-				@fragment_list_array.empty?
+		class StructuredText
+			class Block
+				class Preformatted
+					def as_html(link_resolver=nil)
+			            %(<pre>#{CGI.escapeHTML(super)}</pre>)
+			          end
+				end
 			end
 		end
 

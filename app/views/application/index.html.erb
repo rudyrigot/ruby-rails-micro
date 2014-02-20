@@ -23,15 +23,15 @@
     </div>
   </div>
 
-  <% if !@ctas.empty? %>
+  <% if @ctas.length != 0 %>
     <div id="ctas" class="container">
       <% @ctas.each do |cta| %>
-        <%= link_to cta['cta.label'].as_text, link_resolver(@maybe_ref).link_to(cta['cta.link']), :class => "btn btn-primary btn-lg" %>
+        <%= link_to cta['cta.label'].as_text, cta['cta.link'].url(link_resolver(@maybe_ref)), :class => "btn btn-primary btn-lg" %>
       <% end %>
     </div>
   <% end %>
 
-  <% if !@references.empty? %>
+  <% if @references.length != 0 %>
     <div id="references" class="container">
       <% @references.each do |reference| %>
         <% if reference['reference.logo'] && reference['reference.logo'].get_view('flat') %>

@@ -17,14 +17,14 @@
 						<%= contributor['contributor.description'] ? contributor['contributor.description'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 					</div>
 
-					<% if contributor['contributor.links'] && !contributor['contributor.links'].empty? %>
+					<% if contributor['contributor.links'] && contributor['contributor.links'] != 0 %>
 						<ul>
 							<% contributor['contributor.links'].each do |linkgroup| %>
 								<% if linkgroup['link'] %>
 									<li>
 										<%= linkgroup['link'].start_html(link_resolver(@maybe_ref)).html_safe %>
 											<%= linkgroup['label'] ? linkgroup['label'].as_text : linkgroup['link'].url %>
-										<%= linkgroup['link'].end_html(link_resolver(@maybe_ref)).html_safe %>
+										<%= linkgroup['link'].end_html.html_safe %>
 									</li>
 								<% end %>
 							<% end %>

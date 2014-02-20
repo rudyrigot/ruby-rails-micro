@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
 
   def dochome
     @docchapters = api.form("doc").query(%([[:d = at(document.type, "docchapter")]])).orderings('[my.docchapter.priority desc]').submit(@ref)
-    if @docchapters.empty?
+    if @docchapters.length == 0
       render inline: "You need to have at least one documentation chapter published", status: :not_found
     else
       redirect_to doc_path(@docchapters[0].id, @docchapters[0].slug, ref: @maybe_ref)

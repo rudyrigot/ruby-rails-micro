@@ -25,7 +25,7 @@ module PrismicService
                      .query("[[:d = at(document.id, \"#{id}\")]]")
                      .submit(ref)
 
-      documents.empty? ? nil : documents.first
+      documents.length == 0 ? nil : documents.first
     end
 
     # Makes a fragment or the whole document be output in HTML with a lower heading.
