@@ -2,7 +2,7 @@
 	<ul class="list-group">
 		<% @docchapters.each do |docchapter| %>
 			<li class="list-group-item">
-				<%= link_to docchapter.first_title, link_resolver(@maybe_ref).link_to(docchapter) %>
+				<%= link_to docchapter.first_title, link_resolver(maybe_ref).link_to(docchapter) %>
 				<% if @document && @docs && docchapter.id == @document.id && !@docs.empty? %>
 					<ul>
 						<% @docs.each do |doc| %>

@@ -10,14 +10,14 @@
 		</div>
 		<div class="col-sm-9">
 			<div class="page-title">
-				<%= @document['docchapter.title'] ? @document['docchapter.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
-				<%= @document['docchapter.intro'] ? @document['docchapter.intro'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+				<%= @document['docchapter.title'] ? @document['docchapter.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+				<%= @document['docchapter.intro'] ? @document['docchapter.intro'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 			</div>
 			<article>
 				<% @docs.each do |doc| %>
 					<section id="<%= doc.id %>">
-						<%= doc['doc.title'] ? doc['doc.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
-						<%= doc['doc.content'] ? doc['doc.content'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+						<%= doc['doc.title'] ? doc['doc.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+						<%= doc['doc.content'] ? doc['doc.content'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 					</section>
 				<% end %>
 			</article>

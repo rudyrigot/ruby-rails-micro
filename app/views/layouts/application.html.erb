@@ -21,16 +21,16 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to "meta-micro", root_path(ref: @maybe_ref), :class => "navbar-brand" %>
+          <%= link_to "meta-micro", root_path(ref: maybe_ref), :class => "navbar-brand" %>
         </div>
         <div class="navbar-collapse collapse" id="top-navbar">
           <ul class="nav navbar-nav">
-            <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path(ref: @maybe_ref) %></li>
-            <li <% if @document.try(:id) == api.bookmark('download') %>class="active"<% end %>><%= link_to "Download", download_path(ref: @maybe_ref) %></li>
-            <li <% if @document.try(:type) == 'doc' || @document.try(:type) == 'docchapter' || action_name == 'docsearch' %>class="active"<% end %>><%= link_to "Documentation", dochome_path(ref: @maybe_ref) %></li>
+            <li <% if @document.try(:id) == api.bookmark('homepage') %>class="active"<% end %>><%= link_to "Home", root_path(ref: maybe_ref) %></li>
+            <li <% if @document.try(:id) == api.bookmark('download') %>class="active"<% end %>><%= link_to "Download", download_path(ref: maybe_ref) %></li>
+            <li <% if @document.try(:type) == 'doc' || @document.try(:type) == 'docchapter' || action_name == 'docsearch' %>class="active"<% end %>><%= link_to "Documentation", dochome_path(ref: maybe_ref) %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li <% if @document.try(:id) == api.bookmark('getinvolved') %>class="active"<% end %>><%= link_to "Get involved", getinvolved_path(ref: @maybe_ref) %></li>
+            <li <% if @document.try(:id) == api.bookmark('getinvolved') %>class="active"<% end %>><%= link_to "Get involved", getinvolved_path(ref: maybe_ref) %></li>
           </ul>
         </div>
       </div>
@@ -44,13 +44,13 @@
               </div>
               <div class="form-group">
                 <select id="releaseSelector" name="ref" onchange="this.form.submit()" class="form-control">
-                  <% if !api.refs.map{|_,r| r.ref }.include?(@ref) %>
+                  <% if !api.refs.map{|_,r| r.ref }.include?(ref) %>
                     <option>?</option>
                   <% end %>
-                  <option value="" <% if @ref == api.master %>selected="selected"<% end %>>As currently seen by guest visitors</option>
+                  <option value="" <% if ref == api.master %>selected="selected"<% end %>>As currently seen by guest visitors</option>
                   <optgroup label="Or preview the website in a future release:">
                     <% api.refs.reject{|_,r| r.master? }.each do |_, ref| %>
-                      <option value="<%= ref.ref %>" <% if @ref == ref.ref %>selected="selected"<% end %>>
+                      <option value="<%= ref.ref %>" <% if ref == ref.ref %>selected="selected"<% end %>>
                         As <%= ref.label %> <%= ref.scheduled_at && ref.scheduled_at.strftime("%Y-%m-%d") %>
                       </option>
                     <% end %>

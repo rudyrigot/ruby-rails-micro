@@ -1,21 +1,20 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :set_ref, :set_maybe_ref
 
   def index
-    @document = PrismicService.get_document(api.bookmark("homepage"), api, @ref)
+    @document = PrismicService.get_document(api.bookmark("homepage"), api, ref)
     @arguments = api.form("arguments")
                     .orderings("[my.argument.priority desc]")
-                    .submit(@ref)
+                    .submit(ref)
     @ctas = api.form("ctas")
     				.orderings("[my.cta.priority desc]")
-                    .submit(@ref)
+                    .submit(ref)
     @references = api.form("references")
-                    .submit(@ref)
+                    .submit(ref)
   end
 
   def download
-    @document = PrismicService.get_document(api.bookmark("download"), api, @ref)
+    @document = PrismicService.get_document(api.bookmark("download"), api, ref)
 
     # Fun trick: in the "body" fragment, only for blocks that are list items containing a single span which is a link,
     # then we override as_html so that it serializes a button instead of a link in a bulleted item.
@@ -30,11 +29,11 @@ class ApplicationController < ActionController::Base
   end
 
   def dochome
-    @docchapters = api.form("doc").query(%([[:d = at(document.type, "docchapter")]])).orderings('[my.docchapter.priority desc]').submit(@ref)
+    @docchapters = api.form("doc").query(%([[:d = at(document.type, "docchapter")]])).orderings('[my.docchapter.priority desc]').submit(ref)
     if @docchapters.length == 0
       render inline: "You need to have at least one documentation chapter published", status: :not_found
     else
-      redirect_to doc_path(@docchapters[0].id, @docchapters[0].slug, ref: @maybe_ref)
+      redirect_to doc_path(@docchapters[0].id, @docchapters[0].slug, ref: maybe_ref)
     end
   end
 
@@ -42,7 +41,7 @@ class ApplicationController < ActionController::Base
     id = params[:id]
     slug = params[:slug]
 
-    @document = PrismicService.get_document(id, api, @ref)
+    @document = PrismicService.get_document(id, api, ref)
 
     # This is how an URL gets checked (with a clean redirect if the slug is one that used to be right, but has changed)
     # Of course, you can change slug_checker in prismic_service.rb, depending on your URL strategy.
@@ -52,7 +51,7 @@ class ApplicationController < ActionController::Base
       redirect_to doc_path(id, @document.slug), status: :moved_permanently if @slug_checker[:redirect]
     else
       # Getting sub-documentations in the chapter, and replacing the serialization of their headers.
-      @docs = @document['docchapter.docs'].map{ |group| PrismicService.get_document(group['linktodoc'], api, @ref) }
+      @docs = @document['docchapter.docs'].map{ |group| PrismicService.get_document(group['linktodoc'], api, ref) }
       @docs.each {|doc|
         PrismicService.lower_html_heading(doc)
       }
@@ -61,46 +60,44 @@ class ApplicationController < ActionController::Base
       @docchapters = api.form('everything')
                         .query('[[:d = at(document.type, "docchapter")]]')
                         .orderings('[my.docchapter.priority desc]')
-                        .submit(@ref)
+                        .submit(ref)
     end
   end
 
   def docsearch
   	@documents = api.form("doc")
                     .query(%([[:d = fulltext(document, "#{params[:q]}")]]))
-                    .submit(@ref)
+                    .submit(ref)
 
     # Getting all chapters (for the left navigation)
     @docchapters = api.form('everything')
                       .query('[[:d = at(document.type, "docchapter")]]')
                       .orderings('[my.docchapter.priority desc]')
-                      .submit(@ref)
+                      .submit(ref)
   end
 
   def getinvolved
-    @document = PrismicService.get_document(api.bookmark("getinvolved"), api, @ref)
+    @document = PrismicService.get_document(api.bookmark("getinvolved"), api, ref)
 
-    @contributors = api.form('contributors').orderings('[my.contributor.level]').submit(@ref)
+    @contributors = api.form('contributors').orderings('[my.contributor.level]').submit(ref)
   end
 
   private
 
 
-  ## before_action methods
-
-  # Setting @ref as the actual ref id being queried, even if it's the master ref.
-  # To be used to call the API, for instance: api.form('everything').submit(@ref)
-  def set_ref
-    @ref = params[:ref].blank? ? api.master_ref.ref : params[:ref]
+  # Returning the actual ref id being queried, even if it's the master ref.
+  # To be used to call the API, for instance: api.form('everything').submit(ref)
+  def ref
+    @ref ||= maybe_ref || api.master_ref.ref
   end
 
-  # Setting @maybe_ref as the ref id being queried, or nil if it is the master ref.
+  # Returning the ref id being queried, or nil if it is the master ref.
   # To be used where you want nothing if on master, but something if on another release.
   # For instance:
-  #  * you can use it to call Rails routes: document_path(ref: @maybe_ref), which will add "?ref=refid" as a param, but only when needed.
+  #  * you can use it to call Rails routes: document_path(ref: maybe_ref), which will add "?ref=refid" as a param, but only when needed.
   #  * you can pass it to your link_resolver method, which will use it accordingly.
-  def set_maybe_ref
-    @maybe_ref = (params[:ref] != '' ? params[:ref] : nil)
+  def maybe_ref
+    @maybe_ref ||= (params[:ref].blank? ? nil : params[:ref])
   end
 
   ##

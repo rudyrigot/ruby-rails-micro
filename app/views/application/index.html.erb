@@ -3,10 +3,10 @@
   <!-- Main jumbotron for a primary marketing message or call to action -->
   <div class="jumbotron">
     <div class="container">
-      
-      <%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
 
-      <%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(@maybe_ref)) : '' %>
+      <%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+
+      <%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : '' %>
 
     </div>
   </div>
@@ -15,9 +15,9 @@
     <div class="row">
       <% @arguments.each do |argument| %>
         <div class="col-md-4" id="<%= argument.id %>">
-          <p class="argument-image"><%= argument['argument.icon'] && argument['argument.icon'].get_view('medium') ? argument['argument.icon'].get_view('medium').as_html_safe(link_resolver(@maybe_ref)) : '' %></p>
+          <p class="argument-image"><%= argument['argument.icon'] && argument['argument.icon'].get_view('medium') ? argument['argument.icon'].get_view('medium').as_html_safe(link_resolver(maybe_ref)) : '' %></p>
           <h3><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h3>
-          <%= argument['argument.description'].as_html_safe(link_resolver(@maybe_ref)) %>
+          <%= argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) %>
         </div>
       <% end %>
     </div>
@@ -26,7 +26,7 @@
   <% if @ctas.length != 0 %>
     <div id="ctas" class="container">
       <% @ctas.each do |cta| %>
-        <%= link_to cta['cta.label'].as_text, cta['cta.link'].url(link_resolver(@maybe_ref)), :class => "btn btn-primary btn-lg" %>
+        <%= link_to cta['cta.label'].as_text, cta['cta.link'].url(link_resolver(maybe_ref)), :class => "btn btn-primary btn-lg" %>
       <% end %>
     </div>
   <% end %>
