@@ -18,6 +18,16 @@ module PrismicService
       Prismic.api(config('url'), access_token)
     end
 
+    def oauth_initiate_url(access_token, oauth_opts)
+      access_token ||= self.access_token
+      Prismic.oauth_initiate_url(config('url'), oauth_opts, access_token)
+    end
+
+    def oauth_check_token(access_token, oauth_opts)
+      access_token ||= self.access_token
+      Prismic.oauth_check_token(config('url'), oauth_opts, access_token)
+    end
+
     # Gets a document from its ID or DocumentLink
     def get_document(id_or_doclink, api, ref)
       id = id_or_doclink.is_a?(Prismic::Fragments::DocumentLink) ? id_or_doclink.id : id_or_doclink

@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  # Rescue OAuth errors for some actions
+  rescue_from Prismic::API::PrismicWSAuthError, with: :redirect_to_signin,
+                                                 only: [:index, :download, :dochome, :doc, :docsearch, :getinvolved]
+
   def index
     @document = PrismicService.get_document(api.bookmark("homepage"), api, ref)
     @arguments = api.form("arguments")
@@ -82,7 +86,13 @@ class ApplicationController < ActionController::Base
     @contributors = api.form('contributors').orderings('[my.contributor.level]').submit(ref)
   end
 
+
   private
+
+  # Used to rescue issues PrismicWSErrors in controller actions
+  def redirect_to_signin
+    redirect_to signin_path
+  end
 
 
   # Returning the actual ref id being queried, even if it's the master ref.
@@ -104,15 +114,18 @@ class ApplicationController < ActionController::Base
 
   # Easier access and initialization of the Prismic::API object.
   def api
+    @api ||= PrismicService.init_api(access_token)
+    rescue Prismic::API::PrismicWSAuthError => e
+      reset_access_token!
+    raise e
+  end
+
+  def access_token
     @access_token = session['ACCESS_TOKEN']
-    begin
-      @api ||= PrismicService.init_api(@access_token)
-    rescue Prismic::API::PrismicWSConnectionError
-      # In case there is a connection error, it could come from an expired token,
-      # so let's try it again after discarding the access token
-      session['ACCESS_TOKEN'] = @access_token = nil
-      @api ||= PrismicService.init_api(@access_token)
-    end
+  end
+
+  def reset_access_token!
+    @access_token = session['ACCESS_TOKEN'] = nil
   end
 
 end
