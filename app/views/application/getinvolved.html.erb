@@ -1,9 +1,13 @@
-<main id="getinvolved" class="container">
-	<section class="row">
-		<div class="col-md-8">
-			<%= render partial: "article" %>
-		</div>
-		<div class="col-md-4" id="contributors">
+<main id="getinvolved">
+		<%= render partial: "pagetitle", locals: {
+				title: @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : nil,
+				lede: @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : nil
+			} %>
+
+		<article class="container">
+			<%= @document['article.body'] ? @document['article.body'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+		</article>
+		<div id="contributors container">
 			<h3>Main contributors</h3>
 			<% @contributors.each do |contributor| %>
 				<section class="contributor" id="<%= contributor.id %>">

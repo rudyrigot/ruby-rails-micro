@@ -1,26 +1,24 @@
-<main id="documentation" class="container">
-	<div class="row">
-		<div class="col-md-3 col-md-offset-9" id="doc-search">
-			<%= render partial: "docsearchform" %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<%= render partial: "docnav" %>
-		</div>
-		<div class="col-sm-9">
-			<div class="page-title">
-				<%= @document['docchapter.title'] ? @document['docchapter.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-				<%= @document['docchapter.intro'] ? @document['docchapter.intro'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+<main id="documentation">
+	<%= render partial: "pagetitle", locals: {
+				title: @document['docchapter.title'] ? @document['docchapter.title'].as_html_safe(link_resolver(maybe_ref)) : nil,
+				lede: @document['docchapter.intro'] ? @document['docchapter.intro'].as_html_safe(link_resolver(maybe_ref)) : nil
+			} %>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<%= render partial: "docsearchform" %>
+				<%= render partial: "docnav" %>
 			</div>
-			<article>
-				<% @docs.each do |doc| %>
-					<section id="<%= doc.id %>">
-						<%= doc['doc.title'] ? doc['doc.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-						<%= doc['doc.content'] ? doc['doc.content'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-					</section>
-				<% end %>
-			</article>
+			<div class="col-sm-9">
+				<article>
+					<% @docs.each do |doc| %>
+						<section id="<%= doc.id %>">
+							<%= doc['doc.title'] ? doc['doc.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+							<%= doc['doc.content'] ? doc['doc.content'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+						</section>
+					<% end %>
+				</article>
+			</div>
 		</div>
 	</div>
 </main>

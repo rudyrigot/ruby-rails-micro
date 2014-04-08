@@ -1,7 +1,0 @@
-<div class="page-title">
-	<%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-	<%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-</div>
-<article>
-	<%= @document['article.body'] ? @document['article.body'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-</article>

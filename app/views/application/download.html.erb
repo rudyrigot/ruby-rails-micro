@@ -1,3 +1,10 @@
-<main id="download" class="container">
-	<%= render partial: "article" %>
+<main id="download">
+	<%= render partial: "pagetitle", locals: {
+				title: @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : nil,
+				lede: @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : nil
+			} %>
 </main>
+
+<article class="container">
+	<%= @document['article.body'] ? @document['article.body'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+</article>

@@ -1,53 +1,131 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
-  padding-bottom: 20px;
 }
 
+body, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Lato', sans-serif;
+	font-weight: 400;
+	color: #99A5B8;
+}
+
+/* Navigation bar */
+.navbar {
+  background-color: #f5f8fc;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.15);
+}
+.navbar-header a {
+  color: #142240;
+  font-weight: 700;
+}
+.navbar-header .icon-bar {
+  background-color: #142240;
+}
+.navbar-nav a {
+  color: #99A5B8;
+}
+.nav>li>a:hover, .nav>li>a:focus {
+  background-color: transparent;
+  color: #142240;
+}
+@media (min-width: 768px) {
+  .navbar-nav.navbar-right>li>a {
+    padding: 6px 20px;
+    border: 1px solid #99A5B8;
+    border-radius: 20px;
+    margin: 8px 0;
+  }
+  .navbar-nav.navbar-right>li>a:hover, .navbar-nav.navbar-right>li>a:focus {
+    border: 1px solid #142240;
+  }
+}
+#prismic-releases {
+  background-color: black;
+  color: white;
+  padding: 5px 0;
+}
+
+/* All page titles in the website */
 .page-title {
-	margin-top: 50px;
-	margin-bottom: 80px;
+  background: -webkit-linear-gradient(left, #1caed1 , #4c74c9);
+  background: -o-linear-gradient(right, #1caed1, #4c74c9);
+  background: -moz-linear-gradient(right, #1caed1, #4c74c9);
+  background: linear-gradient(to right, #1caed1, #4c74c9);
+  color: #DAF5F5;
+  font-size: 16px;
+}
+.page-title h1 {
+  color: white;
+  font-weight: 100;
+  font-size: 50px;
+  margin: 55px 0;
+}
+.page-title.has-lede h1 {
+  margin-bottom: 0;
+}
+.page-title.has-lede p {
+  margin: 5px 0 55px;
+}
+@media (max-width: 767px) {
+  .page-title h1 {
+    font-size: 30px;
+    margin: 30px 0;
+  }
+  .page-title.has-lede p {
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
 }
 
 /* Homepage */
-@media (min-width: 992px) {
-	main#homepage .jumbotron h1 {
-		padding-right: 100px;
-	}
+#homepage .page-title h1 {
+  margin: 100px 0 30px;
+  line-height: 1.3em;
 }
-@media (min-width: 1200px) {
-	main#homepage .jumbotron h1 {
-		padding-right: 300px;
-	}
+#homepage .ctas a {
+  display: block;
+  text-align: center;
+  border: 1px solid white;
+  color: white;
+  border-radius: 5px;
+  padding: 14px 0;
+  font-size: 18px;
+  font-weight: 700;
 }
-main#homepage #arguments {
-	margin-top: 100px;
+#homepage .ctas a:hover {
+  text-decoration: none;
 }
-main#homepage .argument-image {
-	text-align: center;
+#homepage .ctas .primary a {
+  color: #36B0CC;
+  background-color: white;
 }
-@media (max-width: 991px) and (min-width: 500px) {
-	main#homepage .argument-image {
-		float:left;
-		clear:left;
-		margin-right: 20px;
-	}
+#homepage .page-title p {
+  line-height: 1.6em;
+  margin-bottom: 0;
 }
-main#homepage #ctas {
-	margin-top: 100px;
-	margin-bottom: 100px;
-	text-align: center;
+#homepage .ctas {
+  margin-top: 60px;
+  margin-bottom: 145px;
 }
-main#homepage #ctas a {
-	margin: 0 15px;
-}
-main#homepage #references {
-	text-align: center;
-	margin-top: 150px;
-	margin-bottom: 30px;
-}
-main#homepage #references img {
-	margin: 0 20px;
+@media (max-width: 767px) {
+  #homepage .page-title h1 {
+    margin-top: 50px;
+    line-height: 1.1em;
+  }
+  #homepage .page-title p {
+    font-size: 14px;
+  }
+  #homepage .ctas a {
+    border-radius: 5px;
+    padding: 8px 0;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  #homepage .ctas {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 }
 
 /* GitHub embed */
@@ -57,70 +135,3 @@ main#homepage #references img {
 [data-oembed-type='link'][data-oembed-provider='object'] img{ border:none; padding:0; margin:0; width:60px }
 [data-oembed-type='link'][data-oembed-provider='object'] p{ position:absolute; top:36px; left:80px; white-space:nowrap; overflow:hidden; -o-text-overflow:ellipsis; text-overflow:ellipsis}
 [data-oembed-type='link'][data-oembed-provider='object']:hover{-webkit-box-shadow:0 0 5px rgba(56,60,70,0.24);box-shadow:0 0 5px rgba(56,60,70,0.24)}
-
-
-/* Download */
-
-main#download article {
-	margin-bottom: 100px;
-}
-
-main#download .download-button:first-child {
-	margin-top: 20px;
-}
-main#download .download-button {
-	margin-top: 10px;
-}
-
-/* Documentation */
-
-main#documentation #docnav {
-	margin-top: 50px;
-}
-main#documentation section {
-	padding-top: 30px;
-	margin-bottom: 60px;
-	border-top: 1px solid #eee;
-}
-main#documentation ul#searchresult li {
-	font-size: 1.1em;
-	margin-bottom: 10px;
-}
-main#documentation ul#searchresult,
-main#documentation #newsearch {
-	margin-bottom: 50px;
-}
-main#documentation #doc-search {
-	margin-top: 20px;
-}
-
-/* Get involved */
-
-main#getinvolved #contributors {
-	margin-top: 50px;
-	padding: 10px 20px;
-	border: 1px solid #e7e7e7;
-	background: #f8f8f8;
-	border-radius: 10px;
-}
-main#getinvolved #contributors .contributor {
-	margin-top: 40px;
-}
-main#getinvolved #contributors h3 {
-	margin: 15px 0;
-}
-main#getinvolved #contributors h4 {
-	margin: 0;
-	text-align: center;
-}
-main#getinvolved #contributors .image {
-	text-align: center;
-}
-main#getinvolved #contributors .title {
-	margin: 0;
-	font-style: italic;
-	text-align: center;
-}
-main#getinvolved #contributors .description {
-	margin: 10px 0;
-}

@@ -1,12 +1,29 @@
 <main id="homepage">
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
+  <div class="page-title">
     <div class="container">
 
-      <%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+      <div class="row">
+        <div class="col-lg-7 col-md-8 col-sm-10">
+          <%= @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8 col-md-10">
+          <%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+        </div>
+      </div>
 
-      <%= @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+      <div class="row ctas">
+        <% if @ctas.length != 0 %>
+          <% @ctas.each_with_index do |cta, index| %>
+            <div class="col-lg-3 col-md-4 col-sm-6 <%= index==0 ? 'primary' : '' %>">
+              <%= link_to cta['cta.label'].as_text, cta['cta.link'].url(link_resolver(maybe_ref)) %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
 
     </div>
   </div>
@@ -22,14 +39,6 @@
       <% end %>
     </div>
   </div>
-
-  <% if @ctas.length != 0 %>
-    <div id="ctas" class="container">
-      <% @ctas.each do |cta| %>
-        <%= link_to cta['cta.label'].as_text, cta['cta.link'].url(link_resolver(maybe_ref)), :class => "btn btn-primary btn-lg" %>
-      <% end %>
-    </div>
-  <% end %>
 
   <% if @references.length != 0 %>
     <div id="references" class="container">
