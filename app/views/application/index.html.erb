@@ -37,8 +37,8 @@
         <% if reference['reference.logo'] && reference['reference.logo'].get_view('flat') %>
           <%= image_tag(reference['reference.logo'].get_view('flat').url,
                 size: "150x75",
-                alt: reference.fragments['name'].blocks[0].text,
-                title: reference.fragments['name'].blocks[0].text,
+                alt: reference['reference.name'].as_text,
+                title: reference['reference.name'].as_text,
                 id: reference.id) %>
         <% end %>
       <% end %>
