@@ -65,12 +65,10 @@
 
       <%= yield %>
 
-    <hr>
-
-    <div class="container">
+    <div class="container" id="footer-container">
       <footer id="footer">
-        <p>Meta-micro is an example website to be used freely on top of the <a href="http://prismic.io">prismic.io</a> writing-room and content query API.</p>
         <p>
+          Meta-micro is an example website to be used freely on top of the <a href="http://prismic.io">prismic.io</a> writing-room and content query API.
           <% if connected? %>
             <%= link_to signout_path do %>Sign out<% end %>
           <% else %>

@@ -7,6 +7,18 @@ body, h1, h2, h3, h4, h5, h6 {
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
 	color: #99A5B8;
+  line-height: 1.6em;
+}
+
+#footer-container {
+  border-top: 1px solid #979797;
+  padding-top: 25px;
+  padding-bottom: 90px;
+}
+@media (max-width: 767px) {
+  #footer-container {
+    padding-bottom: 0;
+  }
 }
 
 /* Navigation bar */
@@ -100,7 +112,6 @@ body, h1, h2, h3, h4, h5, h6 {
   background-color: white;
 }
 #homepage .page-title p {
-  line-height: 1.6em;
   margin-bottom: 0;
 }
 #homepage .ctas {
@@ -125,6 +136,48 @@ body, h1, h2, h3, h4, h5, h6 {
   #homepage .ctas {
     margin-top: 30px;
     margin-bottom: 30px;
+  }
+}
+#homepage #arguments {
+  margin-bottom: 80px;
+}
+#homepage #arguments .argument-image {
+  padding: 27px;
+  border: 1px solid #28B3D0;
+  border-radius: 46px;
+  float: left;
+  margin-bottom: 34px;
+}
+#homepage #arguments .argument-image img {
+  width: 36px;
+  height: 36px;
+}
+#homepage #arguments h3 {
+  clear: left;
+  color: #142240;
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+#homepage #arguments .argument {
+  margin-top: 75px;
+}
+#homepage #references {
+  text-align: center;
+  margin-bottom: 50px;
+}
+#homepage #references img {
+  margin: 40px 40px 0;
+}
+@media (max-width: 767px) {
+  #homepage #arguments {
+    margin-bottom: 30px;
+  }
+  #homepage #arguments .argument {
+    margin-top: 40px;
+  }
+  #homepage #arguments .argument-image {
+    margin-bottom: 15px;
   }
 }
 

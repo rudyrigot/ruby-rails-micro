@@ -31,8 +31,8 @@
   <div id="arguments" class="container">
     <div class="row">
       <% @arguments.each do |argument| %>
-        <div class="col-md-4" id="<%= argument.id %>">
-          <p class="argument-image"><%= argument['argument.icon'] && argument['argument.icon'].get_view('medium') ? argument['argument.icon'].get_view('medium').as_html_safe(link_resolver(maybe_ref)) : '' %></p>
+        <div class="col-sm-4 argument" id="<%= argument.id %>">
+          <p class="argument-image"><%= argument['argument.icon'] && argument['argument.icon'].get_view('main') ? argument['argument.icon'].get_view('main').as_html_safe(link_resolver(maybe_ref)) : '' %></p>
           <h3><%= argument['argument.title'] ? argument['argument.title'].as_text : '' %></h3>
           <%= argument['argument.description'].as_html_safe(link_resolver(maybe_ref)) %>
         </div>
