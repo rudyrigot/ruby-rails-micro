@@ -3,11 +3,26 @@ body {
   padding-top: 50px;
 }
 
-body, h1, h2, h3, h4, h5, h6 {
+body, h1, h2, h3, h4, h5, h6, pre {
 	font-family: 'Lato', sans-serif;
 	font-weight: 400;
 	color: #99A5B8;
   line-height: 1.6em;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: #142240;
+}
+h1 {
+  font-size: 33px;
+}
+h2 {
+  font-size: 18px;
+  font-weight: 700;
+}
+pre {
+  border: 0;
+  background-color: #F6F7FC;
+  padding: 20px;
 }
 
 #footer-container {
@@ -154,7 +169,6 @@ body, h1, h2, h3, h4, h5, h6 {
 }
 #homepage #arguments h3 {
   clear: left;
-  color: #142240;
   font-weight: 700;
   font-size: 18px;
   margin-bottom: 20px;
@@ -179,6 +193,45 @@ body, h1, h2, h3, h4, h5, h6 {
   #homepage #arguments .argument-image {
     margin-bottom: 15px;
   }
+}
+
+/* Documentation */
+
+#documentation .left-nav, #documentation article {
+  margin-top: 70px;
+  margin-bottom: 70px;
+}
+#documentation .left-nav, #documentation article img {
+  max-width: 100%;
+}
+#documentation #docsearch {
+  border: 1px solid #d1d2d6;
+  padding: 5px 20px;
+  border-radius: 25px;
+}
+#documentation #docsearch input {
+  display: block;
+  padding:0;
+  margin: 0;
+  border:0;
+  max-width: 100%;
+}
+#documentation #docnav h2 a {
+  color: #536FC5;
+}
+#documentation #docnav ul {
+  padding: 0 20px;
+}
+#documentation #docnav ul a {
+  color: #99A5B8;
+}
+#documentation article h2 {
+  border-top: 1px solid #979797;
+  margin-top: 30px;
+  padding-top: 20px;
+}
+@media (max-width: 767px) {
+  #documentation .left-nav { margin-top: 10px; }
 }
 
 /* GitHub embed */

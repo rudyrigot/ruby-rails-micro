@@ -1,18 +1,14 @@
 <div id="docnav">
-	<ul class="list-group">
-		<% @docchapters.each do |docchapter| %>
-			<li class="list-group-item">
-				<%= link_to docchapter.first_title, link_resolver(maybe_ref).link_to(docchapter) %>
-				<% if @document && @docs && docchapter.id == @document.id && !@docs.empty? %>
-					<ul>
-						<% @docs.each do |doc| %>
-							<li>
-								<%= link_to doc.first_title, "##{doc.id}" %>
-							</li>
-						<% end %>
-					</ul>
+	<% @docchapters.each do |docchapter| %>
+		<h2><%= link_to docchapter.first_title, link_resolver(maybe_ref).link_to(docchapter) %></h2>
+		<% if @document && @docs && docchapter.id == @document.id && !@docs.empty? %>
+			<ul>
+				<% @docs.each do |doc| %>
+					<li>
+						<%= link_to doc.first_title, "##{doc.id}" %>
+					</li>
 				<% end %>
-			</li>
+			</ul>
 		<% end %>
-	</ul>
+	<% end %>
 </div>

@@ -1,16 +1,19 @@
 <main id="documentation">
 	<%= render partial: "pagetitle", locals: {
-				title: @document['docchapter.title'] ? @document['docchapter.title'].as_html_safe(link_resolver(maybe_ref)) : nil,
-				lede: @document['docchapter.intro'] ? @document['docchapter.intro'].as_html_safe(link_resolver(maybe_ref)) : nil
+				title: "<h1>Documentation</h1>".html_safe,
+				lede: nil
 			} %>
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-md-3 col-sm-4 left-nav">
 				<%= render partial: "docsearchform" %>
 				<%= render partial: "docnav" %>
 			</div>
-			<div class="col-sm-9">
+			<div class="col-sm-8 col-md-offset-1">
 				<article>
+					<%= @document['docchapter.title'] ? @document['docchapter.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+					<%= @document['docchapter.intro'] ? @document['docchapter.intro'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+
 					<% @docs.each do |doc| %>
 						<section id="<%= doc.id %>">
 							<%= doc['doc.title'] ? doc['doc.title'].as_html_safe(link_resolver(maybe_ref)) : '' %>
