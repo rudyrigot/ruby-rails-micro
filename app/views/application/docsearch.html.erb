@@ -1,34 +1,34 @@
-<main id="documentation" class="container">
-	<div class="row">
-		<div class="col-md-3 col-md-offset-9" id="doc-search">
-			<%= render partial: "docsearchform" %>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-3">
-			<%= render partial: "docnav" %>
-		</div>
-		<div class="col-sm-9">
-			<% if @documents.empty? %>
-				<div class="page-title">
-					<h1>Your search "<%= params[:q] %>" returned no result</h1>
-				</div>
-				<div class="row" id="newsearch">
-					<div class="col-md-offset-2 col-md-8">
-						<h5>Perform new search?</h5>
-						<%= render partial: "docsearchform" %>
-					</div>
-				</div>
-			<% else %>
-				<div class="page-title">
-					<h1>Your search "<%= params[:q] %>" returned <%= @documents.size %> result<%= @documents.size == 1 ? '' : 's' %></h1>
-				</div>
-				<ul id="searchresult">
-					<% @documents.each do |document| %>
-						<li><%= link_to document.first_title, link_resolver(maybe_ref).link_to(document) %></li>
+<main id="documentation">
+	<%= render partial: "pagetitle", locals: {
+				title: "<h1>Documentation</h1>".html_safe,
+				lede: nil
+			} %>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-sm-4 left-nav">
+				<%= render partial: "docsearchform" %>
+				<%= render partial: "docnav" %>
+			</div>
+			<div class="col-sm-8 col-md-offset-1">
+				<article>
+					<% if @documents.size == 0 %>
+						<h1>Your search "<%= params[:q] %>" returned no result</h1>
+						<div class="row" id="newsearch">
+							<div class="col-md-offset-2 col-md-8">
+								<h5>Perform new search?</h5>
+								<%= render partial: "docsearchform" %>
+							</div>
+						</div>
+					<% else %>
+						<h1>Your search "<%= params[:q] %>" returned <%= @documents.size %> result<%= @documents.size == 1 ? '' : 's' %></h1>
+						<ul id="searchresult">
+							<% @documents.each do |document| %>
+								<li><%= link_to document.first_title, link_resolver(maybe_ref).link_to(document) %></li>
+							<% end %>
+						</ul>
 					<% end %>
-				</ul>
-			<% end %>
+				</article>
+			</div>
 		</div>
 	</div>
 </main>
