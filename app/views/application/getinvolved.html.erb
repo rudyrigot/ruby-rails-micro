@@ -1,41 +1,50 @@
 <main id="getinvolved">
-		<%= render partial: "pagetitle", locals: {
-				title: @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : nil,
-				lede: @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : nil
-			} %>
+	<%= render partial: "pagetitle", locals: {
+			title: @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : nil,
+			lede: @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : nil
+		} %>
 
-		<article class="container">
-			<%= @document['article.body'] ? @document['article.body'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-		</article>
-		<div id="contributors container">
-			<h3>Main contributors</h3>
-			<% @contributors.each do |contributor| %>
-				<section class="contributor" id="<%= contributor.id %>">
+	<article class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<%= @document['article.body'] ? @document['article.body'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+				<h2 id="contributors_title">Main contributors</h2>
+				<div class="row">
+					<% @contributors.each_with_index do |contributor, index| %>
+						<div class="col-sm-6">
+							<section class="contributor" id="<%= contributor.id %>">
 
-					<p class="image"><%= contributor['contributor.photo'] && contributor['contributor.photo'].get_view('icon') ? contributor['contributor.photo'].get_view('icon').as_html_safe(link_resolver(maybe_ref)) : '' %></p>
+								<p class="image"><%= contributor['contributor.photo'] && contributor['contributor.photo'].get_view('icon') ? contributor['contributor.photo'].get_view('icon').as_html_safe(link_resolver(maybe_ref)) : '' %></p>
 
-					<h4><%= contributor['contributor.fullname'] ? contributor['contributor.fullname'].as_text : '' %></h4>
-					<p class="title"><%= contributor['contributor.title'] ? contributor['contributor.title'].as_text : '' %></p>
+								<h4><%= contributor['contributor.fullname'] ? contributor['contributor.fullname'].as_text : '' %></h4>
+								<p class="title"><%= contributor['contributor.title'] ? contributor['contributor.title'].as_text : '' %></p>
 
-					<div class="description">
-						<%= contributor['contributor.description'] ? contributor['contributor.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-					</div>
+								<div class="description">
+									<%= contributor['contributor.description'] ? contributor['contributor.description'].as_html_safe(link_resolver(maybe_ref)) : '' %>
+								</div>
 
-					<% if contributor['contributor.links'] && contributor['contributor.links'] != 0 %>
-						<ul>
-							<% contributor['contributor.links'].each do |linkgroup| %>
-								<% if linkgroup['link'] %>
-									<li>
-										<%= linkgroup['link'].start_html(link_resolver(maybe_ref)).html_safe %>
-											<%= linkgroup['label'] ? linkgroup['label'].as_text : linkgroup['link'].url %>
-										<%= linkgroup['link'].end_html.html_safe %>
-									</li>
+								<% if contributor['contributor.links'] && contributor['contributor.links'] != 0 %>
+									<ul>
+										<% contributor['contributor.links'].each do |linkgroup| %>
+											<% if linkgroup['link'] %>
+												<li>
+													<%= linkgroup['link'].start_html(link_resolver(maybe_ref)).html_safe %>
+														<%= linkgroup['label'] ? linkgroup['label'].as_text : linkgroup['link'].url %>
+													<%= linkgroup['link'].end_html.html_safe %>
+												</li>
+											<% end %>
+										<% end %>
+									</ul>
 								<% end %>
-							<% end %>
-						</ul>
+							</section>
+						</div>
+						<% if index % 2 == 1 && index != (@contributors.size - 1) %>
+							</div><div class="row">
+						<% end %>
 					<% end %>
-				</section>
-			<% end %>
+				</div>
+			</div>
 		</div>
-	</section>
+	</article>
+
 </main>
