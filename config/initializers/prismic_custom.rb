@@ -25,11 +25,7 @@ module Prismic
 			            %(<pre>#{CGI.escapeHTML(super)}</pre>)
 			          end
 				end
-			end
-		end
-
-		class StructuredText
-			class Block
+				
 				class Image
 					def as_html(link_resolver = nil)
 						%(<p class="image"><img src="#{url}"></p>)
