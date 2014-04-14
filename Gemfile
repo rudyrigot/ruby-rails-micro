@@ -48,6 +48,8 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'github_api'
+
 gem 'rails_12factor', group: :production
 
 ruby '2.1.1'

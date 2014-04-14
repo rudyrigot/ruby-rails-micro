@@ -20,16 +20,36 @@ class ApplicationController < ActionController::Base
   def download
     @document = PrismicService.get_document(api.bookmark("download"), api, ref)
 
-    # Fun trick: in the "body" fragment, only for blocks that are list items containing a single span which is a link,
-    # then we override as_html so that it serializes a button instead of a link in a bulleted item.
-    @document['article.body'].blocks.each do |block|
-      if block.is_a?(Prismic::Fragments::StructuredText::Block::ListItem) && block.spans.length == 1 && block.spans[0].is_a?(Prismic::Fragments::StructuredText::Span::Hyperlink)
-        def block.as_html(link_resolver = nil)
-          %(<li class="list-unstyled download-button"><a href="#{spans[0].link.url}" class="btn btn-primary" target="_blank">#{as_text}</a></li>)
+    # Doing a little dance with the GitHub API, from the Embed fragment: getting all recent assets
+    if (@document['download.github'] && @document['download.github'].o_embed_json && @document['download.github'].o_embed_json['title'])
+      # Getting the user name and repo name from the Embed fragment
+      github_fullreponame = @document['download.github'].o_embed_json['title']
+      github_username = github_fullreponame.split('/')[0]
+      github_reponame = github_fullreponame.split('/')[1]
+
+      # Retrieving the repo's releases information
+      releases = (Github::Repos.new.releases per_page: 10).all owner: github_username, repo: github_reponame
+
+      if (releases.size > 0)
+        # Sorting the releases
+        sorted_releases = releases.sort{|release1, release2| Date.parse(release2['created_at']) <=> Date.parse(release1['created_at']) }
+
+        # On the one hand: getting the current latest release's assets
+        latest_release = sorted_releases.shift
+        latest_version_number = latest_release['tag_name']
+        @latest_version_assets = latest_release['assets'].map do |asset|
+          {name: asset['name'], size: asset['size'], url: "https://github.com/#{github_username}/#{github_reponame}/releases/download/#{latest_version_number}/#{asset['name']}"}
         end
+
+        # On the other hand: getting the 10 previous assets from previous releases
+        @other_versions_assets = sorted_releases.map { |release|
+          tag_name = release['tag_name']
+          release['assets'].map { |asset|
+            {name: asset['name'], size: asset['size'], url: "https://github.com/#{github_username}/#{github_reponame}/releases/download/#{tag_name}/#{asset['name']}"}
+          }
+        }.flatten.first(10)
       end
     end
-
   end
 
   def dochome

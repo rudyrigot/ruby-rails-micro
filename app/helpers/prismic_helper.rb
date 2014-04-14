@@ -13,14 +13,14 @@ module PrismicHelper
         case doc.id
         when api.bookmark('homepage')
           root_path(ref: maybe_ref)
-        when api.bookmark('download')
-          download_path(ref: maybe_ref)
         when api.bookmark('getinvolved')
           getinvolved_path(ref: maybe_ref)
         else
           raise "Article of id #{doc.id} doesn't have a known bookmark"
         end
 
+      when 'download'
+        download_path(ref: maybe_ref)
       when 'argument'
         root_path(ref: maybe_ref)+"##{doc.id}"
       when 'reference'

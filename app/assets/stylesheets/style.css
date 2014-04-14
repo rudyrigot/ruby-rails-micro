@@ -271,6 +271,26 @@ img {
   margin-top: 20px;
 }
 
+/* Download */
+#download #assets {
+  margin-top: 10px;
+}
+#download #assets a {
+  margin-top: 20px;
+  display: block;
+  color: white;
+  border-radius: 5px;
+  background: #2c91cf;
+  background: -webkit-linear-gradient(left, #1f9dd1 , #2c91cf);
+  background: -o-linear-gradient(right, #1f9dd1, #2c91cf);
+  background: -moz-linear-gradient(right, #1f9dd1, #2c91cf);
+  background: linear-gradient(to right, #1f9dd1, #2c91cf);
+  text-align: center;
+  padding: 14px 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
 /* GitHub embed layout */
 [data-oembed-type='link'][data-oembed-provider='object']{ padding:10px;position:relative; margin: 30px 0; overflow:hidden; }
 [data-oembed-type='link'][data-oembed-provider='object'] h1{ position:absolute; top:16px; left:80px; white-space:nowrap; overflow:hidden; -o-text-overflow:ellipsis; text-overflow:ellipsis; font-size: 1.2em; margin:0;}

@@ -1,10 +1,47 @@
 <main id="download">
 	<%= render partial: "pagetitle", locals: {
-				title: @document['article.title'] ? @document['article.title'].as_html_safe(link_resolver(maybe_ref)) : nil,
-				lede: @document['article.lede'] ? @document['article.lede'].as_html_safe(link_resolver(maybe_ref)) : nil
+				title: @document['download.title'] ? @document['download.title'].as_html_safe(link_resolver(maybe_ref)) : nil,
+				lede: nil
 			} %>
-</main>
 
-<article class="container">
-	<%= @document['article.body'] ? @document['article.body'].as_html_safe(link_resolver(maybe_ref)) : '' %>
-</article>
+	<article class="container">
+		<h1><%= @document['download.github_link'] ? @document['download.github_link'].as_text : '' %></h1>
+		<p><%= @document['download.github'] ? @document['download.github'].as_html_safe(link_resolver(maybe_ref)) : '' %></p>
+
+		<div class="row">
+			<div class="col-md-8">
+				<h2><%= @document['download.download_link'] ? @document['download.download_link'].as_text : '' %></h2>
+				<% if (@latest_version_assets && @latest_version_assets.size > 0) %>
+					<div class="row" id="assets">
+						<% @latest_version_assets.each do |asset| %>
+							<div class="col-md-6">
+								<a href="<%= asset[:url] %>" target="_blank">
+									Download <%= asset[:name] %>
+								</a>
+							</div>
+						<% end %>
+					</div>
+				<% else %>
+					There is no latest releases in the GitHub repository, or it doesn't have any asset
+				<% end %>
+			</div>
+			<div class="col-md-4">
+				<h2><%= @document['download.previous_releases'] ? @document['download.previous_releases'].as_text : '' %></h2>
+				<% if (@other_versions_assets && @other_versions_assets.size > 0) %>
+					<ul>
+						<% @other_versions_assets.each do |asset| %>
+							<li>
+								<a href="<%= asset[:url] %>" target="_blank">
+									Download <%= asset[:name] %>
+								</a>
+							</li>
+						<% end %>
+					</ul>
+				<% else %>
+					There is no latest releases in the GitHub repository, or it doesn't have any asset
+				<% end %>
+			</div>
+		</div>
+	</article>
+
+</main>
