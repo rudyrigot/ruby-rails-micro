@@ -51,6 +51,10 @@ img {
   background-color: #f5f8fc;
   box-shadow: 0 4px 4px rgba(0,0,0,0.15);
 }
+.navbar-brand {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
 .navbar-header a {
   color: #142240;
   font-weight: 700;
@@ -58,8 +62,10 @@ img {
 .navbar-header .icon-bar {
   background-color: #142240;
 }
-.navbar-nav a {
+.navbar-nav>li>a {
   color: #99A5B8;
+  padding-top: 25px;
+  padding-bottom: 25px;
 }
 .nav>li>a:hover, .nav>li>a:focus {
   background-color: transparent;
@@ -70,7 +76,7 @@ img {
     padding: 6px 20px;
     border: 1px solid #99A5B8;
     border-radius: 20px;
-    margin: 8px 0;
+    margin: 18px 0;
   }
   .navbar-nav.navbar-right>li>a:hover, .navbar-nav.navbar-right>li>a:focus {
     border: 1px solid #142240;
